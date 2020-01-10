@@ -1,0 +1,53 @@
+.cont-first {
+  position: relative;
+  width: 30%;
+  margin-left:100px;
+  margin-top:150px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.cont-first:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.type{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  font-size: 30px;
+  font-family:Monotype Corsiva;
+  color: #E83A93;
+}
+
+.type:hover {
+    color: #E83A93; /* Цвет ссылки */
+   }
+
+.cont-second {
+  position: relative;
+  width: 30%;
+  margin-top:-230px;
+  margin-left:930px;
+}
+
+.cont-second:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+h1 {
+    text-align:center;
+    margin-top:50px;
+    font-size: 250%;
+    font-family:Monotype Corsiva;
+}
+

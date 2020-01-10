@@ -1,0 +1,10 @@
+{% extends "makeup/base.html" %}
+{% block content %}
+<p>Здесь вы можете видеть средства и описания к ним, которые используются в макияже.</p>
+<p>На страничке "Голосование" вы можете проголосовать за свой любимый продукт и посмотреть мнение других людей.</p>
+{% for decoration in decor_list %}
+    <h1>{{decoration.product_type}}</h1>
+    <p>Описание: {{decoration.product_info}}</p>
+    <img src="{{decoration.pic}}" width=20%>
+{% endfor %}
+{% endblock content %}

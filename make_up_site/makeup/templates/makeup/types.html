@@ -1,0 +1,20 @@
+{% extends "makeup/base.html" %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/types.css' %}">
+</head>
+
+<body>
+    <h1>Виды</h1>
+    <div class="cont-first">
+        <img src="/static/media/cloud-png.png" class="image">
+        <a class="type" href="{% url 'makeup:decor' %}">Декоративная</a>
+    </div>
+    <div class="cont-second">
+        <img src="/static/media/cloud-png.png" class="image">
+        <a class="type" href="{% url 'makeup:care' %}">Уход</a>
+    </div>
+</body>
+
+{% endblock content %}
