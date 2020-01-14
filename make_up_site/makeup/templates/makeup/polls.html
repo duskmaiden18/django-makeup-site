@@ -17,10 +17,8 @@
 <script>
 
     $(document).ready(function () {
-    console.log(0);
     $('input[type=radio]').change(function() {
         var choice_id=this.value;
-        console.log(choice_id);
         $('button').bind("click", function() {
             question=this.id;
             console.log(question);

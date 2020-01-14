@@ -5,8 +5,11 @@ from django.http import Http404, JsonResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import View
 
-from .models import Decorative,Care
+
+from .models import Decorative,Care,FavCare
+from .forms import CareForm
 
 # Create your views here.
 
@@ -39,6 +42,21 @@ class PollsView(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions."""
         return Decorative.objects.all()
+
+class CarePollsView(View):
+
+    def get(self,request):
+        form = CareForm()
+        return render(request, 'makeup/care_polls.html',context={'form':form})
+    def post(self,request):
+        choice_id=request.POST['companies']
+        selected_choice=FavCare.objects.get(pk=choice_id)
+        selected_choice.votes+=1
+        selected_choice.save()
+        return HttpResponse("THANK YOU")
+        # bound_form = CareForm(request.POST)
+        # if bound_form.is_valid():
+
 
 @csrf_exempt
 def dbchange(request):
