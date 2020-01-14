@@ -4,11 +4,11 @@
         {% csrf_token %}
         {% for field in form %}
             <div class="'form-group">
-                {{ field.label }}
+                <h5>Компании</h5>
                 {{ field }}
             </div>
         {% endfor %}
-        <button type="submit">Голос</button>
+        <button type="submit">Голосовать</button>
     </form>
 
 {% endblock content %}

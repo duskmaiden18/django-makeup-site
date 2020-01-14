@@ -1,0 +1,52 @@
+{% extends "makeup/base.html" %}
+{% load static %}
+{% block content %}
+<label>Здесь вы можете выбрать свою любимую фирму для каждого вида продукта </label>
+{% for type in types_list %}
+<h2>{{type.product_type}}</h2>
+{% for choice in type.fav_set.all %}
+    <input type="radio" name="roditel{{forloop.parentloop.counter}}" id="choice{{ forloop.parentloop.counter }}{{ forloop.counter }}" value="{{ choice.id }}">
+    <label id="inf{{ forloop.parentloop.counter }}{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+    <label id="vsego{{forloop.counter}}"></label><br>
+    <button id="voting{{ forloop.counter }}">Проголосовать</button><br>
+<label> </label>
+{% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+    $('input[type=radio]').change(function() {
+        var choice_id=this.value;
+        $('button').bind("click", function() {
+            question=this.id;
+            console.log(question);
+            question_num=question.slice(-1);
+            console.log(question_num);
+            name="roditel"+question_num;
+            var toHide = document.getElementsByName(name);
+
+            for (var i = 0; i < toHide.length; i ++) {
+                toHide[i].style.display = 'none';
+            }
+            $.ajax({
+                type:"POST",
+                data: {'choice_id':choice_id,'question_num':question_num},
+                url: "db_change",
+                success: function(data){
+                    all_votes=0;
+                    for (var j = 0; j < data.votes.length; j ++){
+                    tag="#inf"+question_num+(j+1);
+                    vse="#vsego"+question_num;
+                    all_votes+=Number(data.votes[j])
+                    console.log(tag);
+                    $(tag).text("  Количество голосов за "+data.choice[j]+"---"+data.votes[j]);}
+                    $(vse).text("Всего голосовали: "+all_votes);
+                        }
+                });
+                });
+                });
+                });
+</script>
+{% endblock content %}

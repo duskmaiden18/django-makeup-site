@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views import generic
 from django.http import Http404, JsonResponse
 from django.http import HttpResponseRedirect
@@ -35,8 +35,12 @@ class CareView(generic.ListView):
         """Return the last five published questions."""
         return Care.objects.all()
 
-class PollsView(generic.ListView):
-    template_name = 'makeup/polls.html'
+
+def polls(request):
+    return render(request, 'makeup/polls.html')
+
+class DecorPollsView(generic.ListView):
+    template_name = 'makeup/decor_polls.html'
     context_object_name = 'types_list'
 
     def get_queryset(self):
@@ -48,12 +52,14 @@ class CarePollsView(View):
     def get(self,request):
         form = CareForm()
         return render(request, 'makeup/care_polls.html',context={'form':form})
+
     def post(self,request):
         choice_id=request.POST['companies']
         selected_choice=FavCare.objects.get(pk=choice_id)
         selected_choice.votes+=1
         selected_choice.save()
-        return HttpResponse("THANK YOU")
+        results=FavCare.objects.all()
+        return render(request,'makeup/care_results.html',context={'results':results})
         # bound_form = CareForm(request.POST)
         # if bound_form.is_valid():
 
