@@ -1,11 +1,12 @@
-from django.http import HttpResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,render_to_response
 from django.views import generic
-from django.http import Http404, JsonResponse
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
+from django.contrib import auth
+
+
+
 
 
 from .models import Decorative,Care,FavCare
@@ -51,7 +52,7 @@ class CarePollsView(View):
 
     def get(self,request):
         form = CareForm()
-        return render(request, 'makeup/care_polls.html',context={'form':form})
+        return render(request, 'makeup/care_polls.html',context={'form':form, 'username':auth.get_user(request).username})
 
     def post(self,request):
         choice_id=request.POST['companies']
@@ -60,8 +61,6 @@ class CarePollsView(View):
         selected_choice.save()
         results=FavCare.objects.all()
         return render(request,'makeup/care_results.html',context={'results':results})
-        # bound_form = CareForm(request.POST)
-        # if bound_form.is_valid():
 
 
 @csrf_exempt
@@ -84,6 +83,27 @@ def dbchange(request):
         mass3.append(i.id)
     context={"id":mass3,"votes":mass2,"choice":mass1}
     return JsonResponse(context)
+
+
+def login(request):
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(request,username=username,password=password)
+        if user is not None:
+            auth.login(request, user)
+            return redirect('polls/')
+        else:
+            return render(request,'makeup/login.html',{'login_error':'User is not found'})
+    else:
+        return render(request, 'makeup/login.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('makeup:index')
+
 
 
 
