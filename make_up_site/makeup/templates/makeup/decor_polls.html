@@ -34,7 +34,7 @@
             $.ajax({
                 type:"POST",
                 data: {'choice_id':choice_id,'question_num':question_num},
-                url: "db_change",
+                url: 'db_change/',
                 success: function(data){
                     all_votes=0;
                     for (var j = 0; j < data.votes.length; j ++){

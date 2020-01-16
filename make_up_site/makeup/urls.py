@@ -13,6 +13,6 @@ urlpatterns = [
     path('types/care/', views.CareView.as_view(), name='care'),
     path('polls/', views.polls, name='polls'),
     path('decorpolls/',views.DecorPollsView.as_view(), name='decor_polls'),
-    path('db_change/',views.dbchange,name='dbchange'),
-    path('carepolls/',views.CarePollsView.as_view(), name='care_polls')
+    path('decorpolls/db_change/',views.dbchange,name='dbchange'),
+    path('carepolls/',views.CarePollsView.as_view(), name='care_polls'),
 ]

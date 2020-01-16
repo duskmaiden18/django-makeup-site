@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATICFILES_DIRS = [
+
+   os.path.join(BASE_DIR, 'make_up_site\\static'),
+   os.path.join(BASE_DIR, 'makeup\\static'),
+    os.path.join(BASE_DIR, 'postapp\\static'),
+]
 
 # Application definition
 
@@ -37,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'makeup.apps.MakeupConfig'
+    'makeup.apps.MakeupConfig',
+    'postapp',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +63,7 @@ ROOT_URLCONF = 'make_up_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'make_up_site\\templates'), os.path.join(BASE_DIR, 'makeup\\templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'make_up_site\\templates'), os.path.join(BASE_DIR, 'makeup\\templates'),os.path.join(BASE_DIR, 'postapp\\templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
