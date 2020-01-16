@@ -1,4 +1,4 @@
-{% extends 'makeup/base.html' %}
+{% extends 'templates/base.html' %}
 {% block content %}
 {% if user.is_authenticated %}
     <form action="{% url 'makeup:care_polls' %}" method="post">

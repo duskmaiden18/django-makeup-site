@@ -5,6 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+
 
 
 
@@ -94,12 +96,11 @@ def login(request):
         user = auth.authenticate(request,username=username,password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('polls/')
+            return redirect('makeup:index')
         else:
             return render(request,'makeup/login.html',{'login_error':'User is not found'})
     else:
         return render(request, 'makeup/login.html')
-
 
 def logout(request):
     auth.logout(request)

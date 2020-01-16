@@ -55,7 +55,7 @@ ROOT_URLCONF = 'make_up_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['make_up_site'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
