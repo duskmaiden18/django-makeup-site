@@ -52,10 +52,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'make_up_site.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['make_up_site'],
+        'DIRS': [os.path.join(BASE_DIR, 'make_up_site\\templates'), os.path.join(BASE_DIR, 'makeup\\templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
