@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from django.contrib import auth
+from django.contrib.auth.forms import UserCreationForm
 
 
 
@@ -103,6 +104,18 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('makeup:index')
+
+def register(request):
+    form=UserCreationForm()
+    if request.method == 'POST':
+        newuser_form = UserCreationForm(request.POST)
+        if newuser_form.is_valid():
+            newuser_form.save()
+            newuser=auth.authenticate(username=newuser_form.cleaned_data['username'],password=newuser_form.cleaned_data['password2'])
+            return redirect('makeup:index')
+        else:
+            form=newuser_form
+    return render(request,'makeup/register.html',context={'form': form})
 
 
 

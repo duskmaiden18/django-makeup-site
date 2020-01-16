@@ -1,6 +1,7 @@
 {% extends "makeup/base.html" %}
 {% load static %}
 {% block content %}
+{% if user.is_authenticated %}
 <label>Здесь вы можете выбрать свою любимую фирму для каждого вида продукта </label>
 {% for type in types_list %}
 <h2>{{type.product_type}}</h2>
@@ -49,4 +50,7 @@
                 });
                 });
 </script>
+{% else %}
+    <h5>Для голосования нужно войти на сайт или зарегестрироваться, если вы не зарегестрированы</h5>
+{% endif %}
 {% endblock content %}

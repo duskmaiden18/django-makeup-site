@@ -44,6 +44,7 @@
     <li class="nav-item"><a class="nav-link" href=" {% url 'makeup:logout' %}">Выйти  {{user.username}} </a></li>
     {% else %}
     <li class="nav-item"><a class="nav-link" href=" {% url 'makeup:login' %}">Войти</a></li>
+    <li class="nav-item"><a class="nav-link" href=" {% url 'makeup:register' %}">Регистрация</a></li>
     {% endif %}
   </ul>
 </nav>
