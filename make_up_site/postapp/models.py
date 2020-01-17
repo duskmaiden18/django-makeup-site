@@ -23,6 +23,9 @@ class Tag(models.Model):
     def __str__(self):
         return '{}'.format(self.title)
 
+    def get_absolute_url(self):
+        return reverse('postapp:tag_detail', kwargs={'slug': self.slug})
+
 class Comment(models.Model):
     text = models.CharField(max_length=200)
     date_pub = models.DateTimeField(auto_now_add=True)

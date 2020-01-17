@@ -2,6 +2,6 @@
 {% block content %}
 <h1 class="mb-5">Tags:</h1>
 {% for tag in tags %}
-    <h5 class="card-title">{{ tag.title }}</h5>
+    <h5><a href="{{tag.get_absolute_url}}">{{ tag.title }}</a></h5>
 {% endfor %}
 {% endblock %}
