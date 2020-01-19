@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Post,Tag
 from django.views import generic
 from django.views import View
-from .forms import TagForm
+from .forms import TagForm,PostForm
 # Create your views here.
 
 
@@ -35,6 +35,20 @@ class TagCreate(View):
             new_tag=bound_form.save()
             return redirect(new_tag)
         return render(request,'postapp/tag_create.html',context={'form':bound_form})
+
+class PostCreate(View):
+
+    def get(self, request):
+        form=PostForm()
+        return render(request,'postapp/post_create.html', context={'form':form})
+
+    def post(self,request):
+        bound_form=PostForm(request.POST)
+
+        if bound_form.is_valid():
+            new_post=bound_form.save()
+            return redirect(new_post)
+        return render(request,'postapp/post_create.html',context={'form':bound_form})
 
 
 

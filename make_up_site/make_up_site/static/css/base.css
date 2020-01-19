@@ -1,3 +1,5 @@
 body {
-    background: white url("/static/media/fon.jpg") no-repeat;
+    background-image:url('/static/media/fon.jpg');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
 }
