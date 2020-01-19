@@ -14,14 +14,14 @@ class Post(models.Model):
         return reverse('postapp:post_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return self.title
 
 class Tag(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True)
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return self.title
 
     def get_absolute_url(self):
         return reverse('postapp:tag_detail', kwargs={'slug': self.slug})

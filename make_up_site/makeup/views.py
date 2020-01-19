@@ -1,16 +1,10 @@
-from django.shortcuts import render,redirect,render_to_response
+from django.shortcuts import render,redirect
 from django.views import generic
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-
-
-
-
-
 
 from .models import Decorative,Care,FavCare
 from .forms import CareForm
