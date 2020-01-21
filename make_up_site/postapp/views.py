@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Post,Tag
 from django.views import generic
 from django.views import View
+from .utils import *
 from .forms import TagForm,PostForm
 # Create your views here.
 
@@ -22,33 +23,15 @@ class TagDetail(generic.DetailView):
     model = Tag
     template_name = 'postapp/tag_detail.html'
 
-class TagCreate(View):
+class TagCreate(ObjectCreateMixin,View):
 
-    def get(self, request):
-        form=TagForm()
-        return render(request,'postapp/tag_create.html', context={'form':form})
+    form_model = TagForm
+    template = 'postapp/tag_create.html'
 
-    def post(self,request):
-        bound_form=TagForm(request.POST)
+class PostCreate(ObjectCreateMixin,View):
 
-        if bound_form.is_valid():
-            new_tag=bound_form.save()
-            return redirect(new_tag)
-        return render(request,'postapp/tag_create.html',context={'form':bound_form})
-
-class PostCreate(View):
-
-    def get(self, request):
-        form=PostForm()
-        return render(request,'postapp/post_create.html', context={'form':form})
-
-    def post(self,request):
-        bound_form=PostForm(request.POST)
-
-        if bound_form.is_valid():
-            new_post=bound_form.save()
-            return redirect(new_post)
-        return render(request,'postapp/post_create.html',context={'form':bound_form})
+    form_model = PostForm
+    template = 'postapp/post_create.html'
 
 
 
