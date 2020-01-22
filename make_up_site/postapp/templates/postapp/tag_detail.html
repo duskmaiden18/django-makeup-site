@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if post.user.username == user.username %}
-<a href="{{tag.get_update_url}}">Изменить пост</a>
+{% if tag.user.username == user.username %}
+<div style="text-align: right; font-size: 13pt">
+<a href="{{tag.get_update_url}}">Изменить тег</a>
+</div>
+<div style="text-align: right; font-size: 13pt">
+<a href="{{tag.get_delete_url}}">Удалить тег</a>
+</div>
 {% endif %}
 <h1 class="mb-5" style="text-align: center;">Посты с тегом "{{tag.title|title}}" :</h1>
 {% for post in tag.posts.all %}

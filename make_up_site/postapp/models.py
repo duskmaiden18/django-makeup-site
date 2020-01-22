@@ -18,6 +18,9 @@ class Post(models.Model):
     def get_update_url(self):
         return reverse('postapp:post_update', kwargs={'slug': self.slug})
 
+    def get_delete_url(self):
+        return reverse('postapp:post_delete', kwargs={'slug': self.slug})
+
     def __str__(self):
         return self.title
 
@@ -34,6 +37,9 @@ class Tag(models.Model):
 
     def get_update_url(self):
         return reverse('postapp:tag_update', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('postapp:tag_delete', kwargs={'slug': self.slug})
 
 class Comment(models.Model):
     text = models.CharField(max_length=200)

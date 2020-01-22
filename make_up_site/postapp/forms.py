@@ -40,3 +40,7 @@ class PostForm(forms.ModelForm):
         if new_slug == 'create':
             raise ValidationError('Slug may not be "Create"')
         return new_slug
+
+# class CommentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comment
