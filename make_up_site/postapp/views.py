@@ -21,12 +21,13 @@ class PostDetail(View):
     def post(self,request,slug):
         post = Post.objects.get(slug=slug)
         bound_form=CommentForm(request.POST)
+        empty_form=CommentForm
         if bound_form.is_valid():
             fleet_record = bound_form.save(commit=False)
             fleet_record.post= post
             fleet_record.user= request.user
             bound_form.save()
-            return render(request,'postapp/post_detail.html',context={'post':post})
+            return render(request,'postapp/post_detail.html',context={'post':post,'form':empty_form})
         return render(request,'postapp/post_detail.html',context={'post':post,'form':bound_form})
 
 def tags_list(request):
