@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="mb-5">Tags:</h1>
+<a href="{% url 'postapp:tag_create' %}" style="margin-left:1430px">Создать тег</a>
+<h1 class="mb-5">Теги:</h1>
 {% for tag in tags %}
     <h5><a href="{{tag.get_absolute_url}}">{{ tag.title }}</a></h5>
 {% endfor %}

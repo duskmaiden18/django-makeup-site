@@ -9,6 +9,7 @@ urlpatterns = [
     path('tag/create', views.TagCreate.as_view(),name='tag_create'),
     path('post/create', views.PostCreate.as_view(),name='post_create'),
     path('post/<str:slug>',views.PostDetail.as_view(),name='post_detail'),
-    path('tag/<str:slug>', views.TagDetail.as_view(), name='tag_detail')
-
+    path('tag/<str:slug>', views.TagDetail.as_view(), name='tag_detail'),
+    path('tag/<str:slug>/update', views.TagUpdate.as_view(), name='tag_update'),
+    path('post/<str:slug>/update',views.PostUpdate.as_view(),name='post_update'),
 ]

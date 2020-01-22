@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <form action="{% url 'postapp:tag_create' %}" method="post">
     {% csrf_token %}
 
@@ -15,6 +16,9 @@
             {{ field }}
         </div>
     {% endfor %}
-    <button type="submit" class="btn btn-primary">Create Tag</button>
+    <button type="submit" class="btn btn-primary">Создать тег</button>
 </form>
+{% else %}
+    <h5>Для создания тега нужно войти на сайт или зарегестрироваться, если вы не зарегестрированы</h5>
+{% endif %}
 {% endblock %}

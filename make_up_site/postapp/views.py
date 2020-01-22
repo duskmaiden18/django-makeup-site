@@ -33,6 +33,17 @@ class PostCreate(ObjectCreateMixin,View):
     form_model = PostForm
     template = 'postapp/post_create.html'
 
+class TagUpdate(ObjectUpdateMixin,View):
+
+    model = Tag
+    form_model = TagForm
+    template = 'postapp/tag_update.html'
+
+class PostUpdate(ObjectUpdateMixin,View):
+
+    model = Post
+    form_model = PostForm
+    template = 'postapp/post_update.html'
 
 
 

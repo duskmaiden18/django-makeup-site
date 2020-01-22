@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if post.user.username == user.username %}
+<a href="{{post.get_update_url}}">Изменить пост</a>
+{% endif %}
 <h1 class="mb-5" style="text-align: center;">{{post.title}}</h1>
-<p style="text-align: center;">{{post.body}} </p>
+<p style="text-align: center;">{{post.body}} -- {{post.user}}</p>
 <div style="text-align: center;">
-        Tags:
+        Теги:
         {% for tag in post.tags.all %}
             <a href="{{tag.get_absolute_url}}">{{tag.title}}</a>
         {% endfor %}

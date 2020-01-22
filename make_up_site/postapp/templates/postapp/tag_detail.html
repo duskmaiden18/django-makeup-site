@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="mb-5" style="text-align: center;">Post with "{{tag.title|title}}" tag:</h1>
+{% if post.user.username == user.username %}
+<a href="{{tag.get_update_url}}">Изменить пост</a>
+{% endif %}
+<h1 class="mb-5" style="text-align: center;">Посты с тегом "{{tag.title|title}}" :</h1>
 {% for post in tag.posts.all %}
     {% include 'postapp/includes/post_card.html' %}
 {% endfor %}
