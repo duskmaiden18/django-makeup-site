@@ -3,7 +3,7 @@ from .models import Post,Tag
 from django.views import generic
 from django.views import View
 from .utils import *
-from .forms import TagForm,PostForm
+from .forms import TagForm,PostForm,CommentForm
 # Create your views here.
 
 
@@ -11,9 +11,23 @@ def posts_list(request):
     posts = Post.objects.all()
     return render(request,'postapp/index.html',context={'posts':posts})
 
-class PostDetail(generic.DetailView):
-    model = Post
-    template_name = 'postapp/post_detail.html'
+class PostDetail(View):
+
+    def get(self,request,slug):
+        post = Post.objects.get(slug=slug)
+        form = CommentForm()
+        return render(request,'postapp/post_detail.html',context={'post':post,'form':form})
+
+    def post(self,request,slug):
+        post = Post.objects.get(slug=slug)
+        bound_form=CommentForm(request.POST)
+        if bound_form.is_valid():
+            fleet_record = bound_form.save(commit=False)
+            fleet_record.post= post
+            fleet_record.user= request.user
+            bound_form.save()
+            return render(request,'postapp/post_detail.html',context={'post':post})
+        return render(request,'postapp/post_detail.html',context={'post':post,'form':bound_form})
 
 def tags_list(request):
     tags = Tag.objects.all()

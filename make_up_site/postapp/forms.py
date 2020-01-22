@@ -1,6 +1,7 @@
 from django import forms
-from .models import Tag,Post
+from .models import Tag,Post,Comment
 from django.core.exceptions import ValidationError
+
 
 class TagForm(forms.ModelForm):
 
@@ -41,6 +42,12 @@ class PostForm(forms.ModelForm):
             raise ValidationError('Slug may not be "Create"')
         return new_slug
 
-# class CommentForm(forms.ModelForm):
-#     class Meta:
-#         model = Comment
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields=['text']
+
+        widgets = {
+            'text': forms.Textarea(attrs={'class': 'form-control'}),
+        }

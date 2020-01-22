@@ -16,4 +16,29 @@
             <a href="{{tag.get_absolute_url}}">{{tag.title}}</a>
         {% endfor %}
 </div>
+<div style="text-align: center;">
+        Комментарии:
+        {% for comment in post.comment_set.all %}
+            <a href="#">{{comment.text}}---{{comment.user}}</a>
+        {% endfor %}
+</div>
+{% if user.is_authenticated %}
+<form action="{{ post.get_absolute_url }}" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group">
+            {% if field.errors %}
+            <div class="alert alert-danger">
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            Прокомментировать:
+            {{ field }}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Комментировать</button>
+</form>
+{% else %}
+    <h5>Для того, чтоб прокоментировать нужно войти на сайт или зарегестрироваться, если вы не зарегестрированы</h5>
+{% endif %}
 {% endblock %}

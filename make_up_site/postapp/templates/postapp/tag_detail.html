@@ -8,7 +8,7 @@
 <a href="{{tag.get_delete_url}}">Удалить тег</a>
 </div>
 {% endif %}
-<h1 class="mb-5" style="text-align: center;">Посты с тегом "{{tag.title|title}}" :</h1>
+<h1 class="mb-5" style="text-align: center;">Посты с тегом "{{tag.title|title}}"---{{tag.user}} :</h1>
 {% for post in tag.posts.all %}
     {% include 'postapp/includes/post_card.html' %}
 {% endfor %}
