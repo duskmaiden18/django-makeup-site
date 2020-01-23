@@ -37,8 +37,6 @@ def posts_list(request):
         'previous_url': previous_url,
         'next_url': next_url,
         'search_query':search_query,
-        'posts':posts,
-
     }
     return render(request,'postapp/index.html',context=context)
 
