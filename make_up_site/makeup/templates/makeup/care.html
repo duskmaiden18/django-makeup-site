@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<p>Здесь вы можете видеть средства и описания к ним, которые используются для ухода за кожей лица.</p>
-{% for care_cosm in care_list %}
-    <h1>{{care_cosm.product_type}}</h1>
-    <p>Описание: {{care_cosm.product_info}}</p>
-    <img src="{{care_cosm.pic}}" width=20%>
-{% endfor %}
+    <p>Здесь вы можете видеть средства и описания к ним, которые используются для ухода за кожей лица.</p>
+    {% for care_cosm in care_list %}
+        <h1>{{care_cosm.product_type}}</h1>
+        <p>Описание: {{care_cosm.product_info}}</p>
+        <img src="{{care_cosm.pic}}" width=20%>
+    {% endfor %}
 {% endblock content %}

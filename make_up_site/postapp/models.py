@@ -24,6 +24,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['-date_pub']
+
 class Tag(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True)
@@ -41,12 +44,17 @@ class Tag(models.Model):
     def get_delete_url(self):
         return reverse('postapp:tag_delete', kwargs={'slug': self.slug})
 
+    class Meta:
+        ordering = ['title']
+
 class Comment(models.Model):
     text = models.CharField(max_length=200)
     date_pub = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,default=1)
     post = models.ForeignKey(Post, on_delete=models.CASCADE,default=5)
 
+    class Meta:
+        ordering = ['-date_pub']
 
 
 

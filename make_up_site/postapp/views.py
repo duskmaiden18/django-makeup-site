@@ -4,12 +4,36 @@ from django.views import generic
 from django.views import View
 from .utils import *
 from .forms import TagForm,PostForm,CommentForm
+from django.core.paginator import Paginator
 # Create your views here.
 
 
 def posts_list(request):
     posts = Post.objects.all()
-    return render(request,'postapp/index.html',context={'posts':posts})
+    paginator = Paginator(posts,2)
+
+    page_number = request.GET.get('page',1)
+    page = paginator.get_page(page_number)
+
+    is_paginated = page.has_other_pages()
+    if page.has_previous():
+        previous_url = '?page={}'.format(page.previous_page_number())
+    else:
+        previous_url = ''
+
+    if page.has_next():
+        next_url = '?page={}'.format(page.next_page_number())
+    else:
+        next_url = ''
+
+    context = {
+        'page_object': page,
+        'is_paginated': is_paginated,
+        'previous_url': previous_url,
+        'next_url': next_url,
+
+    }
+    return render(request,'postapp/index.html',context=context)
 
 class PostDetail(View):
 

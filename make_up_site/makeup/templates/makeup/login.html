@@ -9,7 +9,7 @@
         <label for="password">Пароль</label>
         <input type="password" name="password" id="password">
         {% if login_error %}
-         <label class="error">{{login_error}}</label>
+            <label class="error">{{login_error}}</label>
         {% endif %}
         <input class="button" type="submit" value="Войти">
         <div class="label round secondary"><a href="{% url 'makeup:register' %}">Регистрация</a></div>

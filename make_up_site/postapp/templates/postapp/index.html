@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<div style="text-align: right; font-size: 13pt">
-<a href="{% url 'postapp:post_create' %}">Создать пост</a>
-</div>
-<div style="text-align: right; font-size: 13pt">
-<a href="{% url 'postapp:tag_create' %}">Создать тег</a>
-</div>
-<h1 class="mb-5">Посты:</h1>
-{% for post in posts %}
-    {% include 'postapp/includes/post_card.html' %}
-{% endfor %}
+  <div style="text-align: right; font-size: 13pt">
+    <a href="{% url 'postapp:post_create' %}">Создать пост</a>
+  </div>
+  <div style="text-align: right; font-size: 13pt">
+    <a href="{% url 'postapp:tag_create' %}">Создать тег</a>
+  </div>
+  <h1 class="mb-5">Посты:</h1>
+  {% for post in page_object.object_list %}
+      {% include 'postapp/includes/post_card.html' %}
+  {% endfor %}
+
+  {% if is_paginated %}
+    <nav aria-label="..." style="margin-left: 620px; margin-top: 50px;">
+      <ul class="pagination">
+        <li class="page-item {% if not previous_url %} disabled {% endif %}">
+          <a class="page-link" href="{{ previous_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        {% for n in page_object.paginator.page_range %}
+          {% if page_object.number == n %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="?page={{n}}">{{n}} <span class="sr-only">(current)</span></a>
+            </li>
+          {% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
+            <li class="page-item"><a class="page-link" href="?page={{n}}">{{n}}</a></li>
+          {% endif %}
+        {% endfor %}
+          <li class="page-item {% if not next_url %} disabled {% endif %}">
+            <a class="page-link" href="{{ next_url }}">Next</a>
+          </li>
+      </ul>
+    </nav>
+  {% endif %}
 {% endblock %}
