@@ -14,4 +14,5 @@ urlpatterns = [
     path('post/<str:slug>/update',views.PostUpdate.as_view(),name='post_update'),
     path('tag/<str:slug>/delete', views.TagDelete.as_view(), name='tag_delete'),
     path('post/<str:slug>/delete', views.PostDelete.as_view(), name='post_delete'),
+
 ]

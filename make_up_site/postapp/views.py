@@ -5,16 +5,21 @@ from django.views import View
 from .utils import *
 from .forms import TagForm,PostForm,CommentForm
 from django.core.paginator import Paginator
+from django.db.models import Q
 # Create your views here.
 
 
 def posts_list(request):
-    posts = Post.objects.all()
-    paginator = Paginator(posts,2)
+    print(request.GET)
+    search_query = request.GET.get('search','')
+    if search_query:
+        posts = Post.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
+    else:
+        posts = Post.objects.all()
 
+    paginator = Paginator(posts,2)
     page_number = request.GET.get('page',1)
     page = paginator.get_page(page_number)
-
     is_paginated = page.has_other_pages()
     if page.has_previous():
         previous_url = '?page={}'.format(page.previous_page_number())
@@ -31,6 +36,8 @@ def posts_list(request):
         'is_paginated': is_paginated,
         'previous_url': previous_url,
         'next_url': next_url,
+        'search_query':search_query,
+        'posts':posts,
 
     }
     return render(request,'postapp/index.html',context=context)
