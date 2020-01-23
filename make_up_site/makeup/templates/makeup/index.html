@@ -1,4 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Привет! Это начальная страница сайта для тех, кто хочет знать немного больше о косметике для себя. Удачного просмотра!</h1>
+{% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    </head>
+    <div class="bord-text">
+        <p>Привет! Это начальная страница сайта для тех,
+            кто хочет знать немного больше о косметике для себя.
+            Удачного просмотра!</p>
+        <button id="load" class="click-on">Нажми!</button>
+        <label id="compliment"></label>
+    </div>
+    <figure class="fig">
+        <img src="/static/media/cats.png" width="500" height="300">
+    </figure>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#load").bind("click", function() {
+                $.ajax({
+                    success: function(){
+                        $('#compliment').text("Ты неотразима!")
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock content %}

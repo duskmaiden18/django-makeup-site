@@ -1,0 +1,27 @@
+.bord-text {
+    width: 800px;
+    height: 90px; /* Размеры */
+    background: #ff69b4; /* Цвет фона */
+    outline: 2px solid #000; /* Чёрная рамка */
+    border: 3px solid #fff; /* Белая рамка */
+    text-align: center;
+    margin-top: 140px;
+    margin-left: 380px;
+}
+p {
+    font-size: 26px;
+}
+
+.click-on {
+    margin-top: 80px;
+    background: #ff7f50; /* Цвет фона */
+    outline: 2px solid #000; /* Чёрная рамка */
+    outline-radius: 10px;
+    width:100px;
+    height:50px;
+}
+
+.fig {
+    text-align: center; /* Выравнивание по центру */
+    margin-top: 120px; /* Отступ сверху */
+   }
