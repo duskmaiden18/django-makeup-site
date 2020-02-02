@@ -10,7 +10,6 @@ from django.db.models import Q
 
 
 def posts_list(request):
-    print(request.GET)
     search_query = request.GET.get('search','')
     if search_query:
         posts = Post.objects.filter(Q(title__icontains=search_query) | Q(body__icontains=search_query))
